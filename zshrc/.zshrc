@@ -15,7 +15,8 @@ setopt inc_append_history
 # . "$HOME/.asdf/asdf.sh"
 
 # fpath=(${ASDF_DIR}/completions $fpath)
-# autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit
+alias please="sudo"
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
