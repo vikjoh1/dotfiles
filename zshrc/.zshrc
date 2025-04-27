@@ -17,6 +17,11 @@ setopt inc_append_history
 # fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit && compinit
 alias please="sudo"
+alias la="ls -a"
+alias l="ls"
+alias cat="bat"
+alias gc="git commit"
+alias fzf="fzf --preview='bat {}'"
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

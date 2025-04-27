@@ -1,0 +1,16 @@
+configuration{
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Gruvbox-Plus-Dark";
+    drun-display-format: "{icon} {name}";
+    drun-display-actions: true;
+    location: 0;
+    disable-history: false;
+    display-drun: " Apps ";
+    display-run: " Commands ";
+    display-window: " Windows ";
+    display-ssh: " SSH ";
+    display-filebrowser: " File Browser ";
+    sidebar-mode: false;
+}
+@theme "~/.config/rofi/themes/solid/launcher.rasi"
