@@ -28,6 +28,7 @@
 
 #custom-appmenuicon,
 #custom-notifications,
+#custom-player,
 #custom-powermenuicon,
 #clock,
 #battery,
@@ -229,4 +230,16 @@ label:focus { }
 }
 #tooltip #label {
   color: @text;
+}
+
+#custom-player {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 2px solid @black;
+  background: @background;
+  color: @foreground;
+}
+
+#custom-player.Paused {
+  opacity: 0.5;
 }
