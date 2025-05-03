@@ -13,6 +13,9 @@ SAVEHIST=50000
 setopt inc_append_history
 
 # . "$HOME/.asdf/asdf.sh"
+#
+
+. /usr/local/bin/z.sh
 
 # fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit && compinit
