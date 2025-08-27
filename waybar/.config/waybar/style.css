@@ -1,32 +1,36 @@
-@define-color background    #282828;  /* dark0 */
-@define-color foreground    #ebdbb2;  /* light0 */
-@define-color cursor        #ebdbb2;  /* light0 */
+@define-color background    #1d2021;
+@define-color foreground    #d4be98;
 
-@define-color black         #282828;  /* color0 */
-@define-color red           #cc241d;  /* color1 */
-@define-color green         #98971a;  /* color2 */
-@define-color yellow        #d79921;  /* color3 */
-@define-color blue          #458588;  /* color4 */
-@define-color magenta       #b16286;  /* color5 */
-@define-color cyan          #689d6a;  /* color6 */
-@define-color grey          #a89984;  /* color7 */
+@define-color surface0 #3c3836;
+@define-color text #d4be98;
+@define-color base #1d2021;
 
-@define-color light_black   #928374;  /* color8 */
-@define-color light_red     #fb4934;  /* color9 */
-@define-color light_green   #b8bb26;  /* color10 */
-@define-color light_yellow  #fabd2f;  /* color11 */
-@define-color light_blue    #83a598;  /* color12 */
-@define-color light_magenta #d3869b;  /* color13 */
-@define-color light_cyan    #8ec07c;  /* color14 */
-@define-color white         #ebdbb2;  /* color15 */
+@define-color black         #665c54;
+@define-color red           #ea6962;
+@define-color green         #a9b665;
+@define-color yellow        #e78a4e;
+@define-color blue          #7daea3;
+@define-color magenta       #d3869b;
+@define-color cyan          #89b482;
+@define-color white         #d4be98;
+@define-color grey          #a89984;
+
+@define-color light_black   #928374;
+@define-color light_red     #ae6962;
+@define-color light_green   #a9b665;
+@define-color light_yellow  #d8a657;
+@define-color light_blue    #7daea3;
+@define-color light_magenta #d3869b;
+@define-color light_cyan    #89b482;
 
 * {
     font-family: "JetBrainsMonoNL Nerd Font", 'Noto Sans Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', monospace;
     font-size: 15px;
-    color: @background;
+    color: @foreground;
 }
 
 #custom-appmenuicon,
+#custom-k8s-pods,
 #custom-notifications,
 #custom-player,
 #custom-powermenuicon,
@@ -50,21 +54,17 @@
 #power-profiles-daemon,
 #mpd {
    background-color: @background;
-   border-radius: 20px;
-   border: 2px solid @black;
+   border-radius: 14px;
+   border: 2px solid @surface0;
    /*box-shadow: 1px 0px 3px 3px alpha(@background,0.5);*/
-   margin: 10px 5px;
-   padding: 0px 10px;
+   margin: 6px 4px;
+   padding: 2px 10px;
    color: @foreground;
 }
 
-@keyframes gradient_f_nh {
-	0% {
-		background-position: 0% 200%;
-	}
-	100% {
-		background-position: 200% 200%;
-	}
+@keyframes gradient {
+	0% { background-position: 0% 200%; }
+	100% { background-position: 200% 200%; }
 }
 
 #custom-appmenuicon {
@@ -97,7 +97,7 @@ window#waybar {
 #workspaces button{
    background: @background;
    border-radius: 20px;
-   border: 2px solid @black;
+   border: 2px solid @surface0;
    /*box-shadow: 1px 0px 3px 3px alpha(@background,0.5);*/
    margin: 10px;
    margin-right: 0px;
@@ -149,7 +149,8 @@ label:focus { }
 }
 
 #memory {
-    background-color: #cba6f7;
+    background-color: @yellow;
+    color: @background;
     font-weight: bolder;
 }
 
@@ -163,13 +164,13 @@ label:focus { }
 }
 
 #network.disabled{
-    background-color: #45475a;
+    background-color: @surface0;
 }
 
 #network.disconnected{
    border-color: @red;
    background-color: @red;
-   color: @base;
+   color: @foreground;
    font-weight: bolder;
    padding-top: 3px;
    padding-right: 11px;
@@ -188,7 +189,7 @@ label:focus { }
 #pulseaudio.muted {
    border-color: @red;
    background-color: @red;
-   color: @base;
+   color: @foreground;
 }
 
 #temperature {
@@ -196,7 +197,7 @@ label:focus { }
 
 #temperature.critical {
     background-color: @red;
-    color: @text;
+    color: @foreground;
 }
 
 #tray {
@@ -226,16 +227,17 @@ label:focus { }
 
 #tooltip {
   background: @surface0;
-  border: 2px solid @surface0;
+  border: 1px solid @light_black;
+  border-radius: 8px;
 }
 #tooltip #label {
-  color: @text;
+  color: @foreground;
 }
 
 #custom-player {
   padding: 6px 12px;
   border-radius: 20px;
-  border: 2px solid @black;
+  border: 2px solid @surface0;
   background: @background;
   color: @foreground;
 }

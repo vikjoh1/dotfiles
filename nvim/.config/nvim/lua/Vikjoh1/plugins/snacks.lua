@@ -71,7 +71,7 @@ return {
           { section = "startup" },
           {
             section = "terminal",
-            cmd = "ascii-image-converter ~/.config/backgrounds/brutalist2.jpg -C -c",
+            cmd = "ascii-image-converter ~/.config/backgrounds/wp11095021-godspeed-you-black-emperor-wallpapers.jpg -c -C -f",
             random = 10,
             pane = 2,
             indent = 4,

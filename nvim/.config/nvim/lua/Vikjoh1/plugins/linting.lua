@@ -16,6 +16,8 @@ return {
       python = { "pylint" },
     }
 
+    lint.linters_by_ft.go = { "golangcilint" }
+
     eslint.args = {
       "--no-warn-ignores",
       "--format",

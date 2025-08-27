@@ -18,12 +18,12 @@ return {
       skip_confirm_for_simple_edits = true,
     })
 
-    vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "open parent dir" })
+    vim.keymap.set("n", "-", ":Oil<CR>", { desc = "open parent dir" })
     vim.keymap.set("n", "<leader>-", require("oil").toggle_float, { desc = "toggle float oil" })
-    
+
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "oil",
-      callback = function () 
+      callback = function ()
         vim.opt_local.cursorline = true
       end
     })

@@ -5,10 +5,10 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
-  config = function ()
+  config = function()
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-      callback = function (ev)
+      callback = function(ev)
         local opts = { buffer = ev.buf, silent = true }
 
         opts.desc = "show LSP references"
@@ -56,12 +56,77 @@ return {
     }
 
     vim.diagnostic.config({
-      signs = {
-        text = signs,
-      },
+      signs = { text = signs },
       virtual_text = true,
       underline = true,
       update_in_insert = false,
+    })
+
+    local lspconfig = require("lspconfig")
+    local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    local capabilities = cmp_nvim_lsp.default_capabilities()
+    local util = require("lspconfig.util")
+
+    lspconfig.lua_ls.setup({
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" },
+          },
+          completion = {
+            callSnippet = "Replace",
+          },
+          workspace = {
+            library = {
+              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+              [vim.fn.stdpath("config") .. "/lua"] = true,
+            },
+          },
+        },
+      },
+    })
+
+    lspconfig.ts_ls.setup({
+      capabilities = capabilities,
+      root_dir = util.root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git"),
+      single_file_support = false,
+      init_options = {
+        preferences = {
+          includeCompletionsWithSnippetText = true,
+          includeCompletionsForImportStatements = true,
+        },
+      },
+    })
+
+    lspconfig.gopls.setup({
+      capabilities = capabilities,
+      root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+      settings = {
+        gopls = {
+          gofumpt     = true,
+          completeUnimported = true,
+          analyses    = {
+            unusedparams   = true,
+            shadow         = true,
+            fieldalignment = true,
+          },
+          staticcheck = true,
+          codelenses  = {
+            generate   = true,
+            gc_details = true,
+          },
+          hints       = {
+            parameterNames         = true,
+            functionTypeParameters = true,
+            assignVariableTypes    = true,
+            compositeLiteralFields = true,
+            compositeLiteralTypes  = true,
+            constantValues         = true,
+            rangeVariableTypes     = true,
+          },
+        },
+      },
     })
   end
 }

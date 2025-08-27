@@ -24,7 +24,7 @@ return {
 						  icon = "  :",
 							lang = "lua",
 						},
-						input = { view = "cmdline_input", icon = " 󰥻 :" }, 
+						input = { view = "cmdline_input", icon = " 󰥻 :" },
           },
         },
         views = {

@@ -14,17 +14,14 @@ autoload -Uz compinit && compinit
 
 setopt inc_append_history
 
-# . "$HOME/.asdf/asdf.sh"
-#
-
 . /usr/local/bin/z.sh
 
-# fpath=(${ASDF_DIR}/completions $fpath)
 alias please="sudo"
 alias la="ls -a"
 alias l="ls"
 alias cat="bat"
 alias fzf="fzf --preview='bat {}'"
+alias py="python3"
 
 # git
 alias gc="git commit"
@@ -35,5 +32,4 @@ alias gd="git diff"
 alias gsw="git switch"
 alias gl="git log --oneline --graph --decorate"
 
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+export PATH="${XDG_DATA_HOME:-$HOME/.local/share}/bob/nvim-bin:$PATH"

@@ -38,10 +38,17 @@ return {
 				liquid = { "prettier" },
 				lua = { "stylua" },
 				python = { "black" },
+        go = { "goimports", "gofumpt" },
 				markdown = { "prettier" },
 				["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 			},
 		})
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = "*.go",
+      callback = function (args)
+        require("conform").format({ bufnr = args.buf, lsp_fallback = true })
+      end,
+    })
 		conform.formatters.prettier = {
 			args = {
 				"--stdin-filepath",

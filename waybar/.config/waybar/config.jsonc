@@ -10,6 +10,7 @@
   ],
   "modules-center": [],
   "modules-right": [
+    "custom/k8s-pods",
     "custom/player",
     "custom/notifications",
     "power-profiles-daemon",
@@ -56,6 +57,14 @@
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
     "tooltip": false
+  },
+  "custom/k8s-pods": {
+    "return-type": "json",
+    "exec": "~/.config/scripts/k9s.sh",
+    "interval": 10,
+    "format": "{}",
+    "on-click": "~/.config/scripts/k9s.sh --menu",
+    "tooltip": true
   },
   "custom/notifications": {
     "format": "{icon} {0}",

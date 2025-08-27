@@ -1,4 +1,5 @@
 vim.cmd("let g:netrw_banner = 0")
+vim.o.completeopt = "menu,menuone,noselect"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
