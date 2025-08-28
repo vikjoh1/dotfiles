@@ -15,8 +15,6 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 
-vim.keymap.set("v", "p", '"_dp', opts)
-
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "<C-c>", ":nohl<CR>", { desc = "clear search highlight", silent = true })
@@ -27,14 +25,14 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "x", '"_x', opts)
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-    { desc = "replace word under cursor globally" })
+  { desc = "replace word under cursor globally" })
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { desc = "makes file executable", silent = true })
 
 -- hl yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "highlight when yanking text",
   group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-  callback = function ()
+  callback = function()
     vim.highlight.on_yank()
   end,
 })
@@ -44,11 +42,8 @@ vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "split window horizontally"
 vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "make splits equal size" })
 vim.keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "close current split" })
 
-vim.keymap.set("n", "<leader>fp", function ()
+vim.keymap.set("n", "<leader>fp", function()
   local filepath = vim.fn.expand("%:~")
   vim.fn.setreg("+", filepath)
   print("filepath copied to clipboard: " .. filepath)
 end, { desc = "copy filepath to clipboard" })
-
-
-

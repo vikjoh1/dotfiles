@@ -22,25 +22,6 @@ return {
     end
   },
   {
-    "echasnovski/mini.files",
-    config = function ()
-      local minifiles = require("mini.files")
-      minifiles.setup({
-        mappings = {
-          go_in = "<CR>",
-          go_in_plus = "L",
-          go_out = "-",
-          go_out_plus = "H",
-        },
-      })
-      vim.keymap.set("n", "<leader>ee", "<cmd>lua MiniFiles.open()<CR>", { desc = "toggle mini file explorer" })
-      vim.keymap.set("n", "<leader>ef", function ()
-        minifiles.open(vim.api.nvim_buf_get_name(0), false)
-        minifiles.reveal_cwd()
-      end, { desc = "toggle into currently opened file" })
-    end
-  },
-  {
     "echasnovski/mini.surround",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
