@@ -17,6 +17,7 @@ setopt inc_append_history
 . /usr/local/bin/z.sh
 
 alias please="sudo"
+alias ls="eza"
 alias la="ls -a"
 alias l="ls"
 alias cat="bat"

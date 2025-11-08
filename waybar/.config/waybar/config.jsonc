@@ -6,14 +6,15 @@
   "reload_style_on_change": true,
   "modules-left": [
     "custom/appmenuicon",
-    "hyprland/workspaces"
+    "hyprland/workspaces",
+    "network"
   ],
   "modules-center": [],
   "modules-right": [
+    "custom/av",
+    "custom/bluetooth",
     "custom/k8s-pods",
-    "custom/player",
     "custom/notifications",
-    "power-profiles-daemon",
     "battery",
     "tray",
     "clock",
@@ -34,6 +35,27 @@
     },
     "all-outputs": true,
     "persistent-workspaces": {}
+  },
+  "custom/av": {
+    "exec": "~/.config/waybar/custom_modules/av_now.sh",
+    "return-type": "json",
+    "interval": 1,
+    "format": "{}",
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+    "tooltip": true
+  },
+  "custom/bluetooth": {
+    "exec": "~/.config/waybar/custom_modules/bt_status.sh",
+    "return-type": "json",
+    "interval": 3,
+    "format": "{}",
+    "on-click": "~/.config/waybar/custom_modules/bt_toggle.sh",
+    "on-click-right": "~/.config/waybar/custom_modules/bt_menu.sh",
+    "tooltip": true
   },
   "custom/appmenuicon": {
     "format": "",

@@ -62,12 +62,70 @@ return {
       update_in_insert = false,
     })
 
-    local lspconfig = require("lspconfig")
+    -- local lspconfig = require("lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local capabilities = cmp_nvim_lsp.default_capabilities()
-    local util = require("lspconfig.util")
+    -- local util = require("lspconfig.util")
+    --
 
-    lspconfig.lua_ls.setup({
+    local mod_cache, std_lib
+
+    local function identify_go_dir(custom_args, on_complete)
+      local cmd = { "go", "env", custom_args.envvar_id }
+      vim.system(cmd, { text = true }, function(output)
+        local res = vim.trim(output.stdout or "")
+        if output.code == 0 and res ~= "" then
+          if custom_args.custom_subdir and custom_args.custom_subdir ~= "" then
+            res = res .. custom_args.custom_subdir
+          end
+          on_complete(res)
+        else
+          vim.schedule(function ()
+            vim.notify(
+              ("[gopls] identify %s dir failed (%d): %s\n%s"):format(
+                custom_args.envvar_id,
+                output.code,
+                vim.inspect(cmd),
+                output.stderr
+              )
+            )
+          end)
+          on_complete(nil)
+        end
+      end)
+    end
+
+    local function get_std_lib_dir()
+      if std_lib and std_lib ~= "" then return std_lib end
+      identify_go_dir({ envvar_id = "GOROOT", custom_subdir = "/src" }, function(dir)
+        if dir then std_lib = dir end
+      end)
+      return std_lib
+    end
+
+    local function get_mod_cache_dir()
+      if mod_cache and mod_cache ~= "" then return mod_cache end
+      identify_go_dir({ envvar_id = "GOMODCACHE" }, function(dir)
+        if dir then mod_cache = dir end
+      end)
+      return mod_cache
+    end
+
+    local function get_root_dir_for_go(fname)
+      if mod_cache and fname:sub(1, #mod_cache) == mod_cache then
+        local clients = vim.lsp.get_clients({ name = "gopls" })
+        if #clients > 0 then return clients[#clients].config.root_dir end
+      end
+      if std_lib and fname:sub(1, #std_lib) == std_lib then
+        local clients = vim.lsp.get_clients({ name = "gopls" })
+        if #clients > 0 then return clients[#clients].config.root_dir end
+      end
+      return vim.fs.root(fname, "go.work")
+        or vim.fs.root(fname, "go.mod")
+        or vim.fs.root(fname, ".git")
+    end
+
+    vim.lsp.config('lua_ls', {
       capabilities = capabilities,
       settings = {
         Lua = {
@@ -87,9 +145,17 @@ return {
       },
     })
 
-    lspconfig.ts_ls.setup({
+    vim.lsp.config('ts_ls', {
       capabilities = capabilities,
-      root_dir = util.root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git"),
+      root_dir = function(bufnr, on_dir)
+        local fname = vim.api.nvim_buf_get_name(bufnr)
+        on_dir(
+          vim.fs.root(fname, "tsconfig.json")
+          or vim.fs.root(fname, "jsconfig.json")
+          or vim.fs.root(fname, "package.json")
+          or vim.fs.root(fname, ".git")
+        )
+      end,
       single_file_support = false,
       init_options = {
         preferences = {
@@ -99,9 +165,16 @@ return {
       },
     })
 
-    lspconfig.gopls.setup({
+    vim.lsp.config('gopls', {
+      cmd = { "gopls" },
+      filetypes = { "go", "gomod", "gowork", "gotmpl" },
+      root_dir = function(bufnr, on_dir)
+        local fname = vim.api.nvim_buf_get_name(bufnr)
+        get_mod_cache_dir()
+        get_std_lib_dir()
+        on_dir(get_root_dir_for_go(fname))
+      end,
       capabilities = capabilities,
-      root_dir = util.root_pattern("go.work", "go.mod", ".git"),
       settings = {
         gopls = {
           gofumpt     = true,
@@ -128,5 +201,7 @@ return {
         },
       },
     })
+
+    vim.lsp.set_log_level("WARN")
   end
 }

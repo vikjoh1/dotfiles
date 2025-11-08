@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 
-import json, os, re, subprocess, sys
+import json
+import os
+import re
+import subprocess
+import sys
+
 
 def sh(cmd, stdin=None):
     return subprocess.check_output(cmd, input=stdin, text=True).strip()
+
 
 def default_node(kind):
     for l in sh(['pactl', 'info']).splitlines():
         if l.startswith(f'Default {kind}'):
             return l.split(':', 1)[1].strip()
+
 
 def nice_name(pulse_name):
     desc = ''
@@ -22,13 +29,15 @@ def nice_name(pulse_name):
             break
     return desc or pulse_name
 
+
 def volume_and_icon():
     out = sh(['pactl', 'get-sink-volume', '@DEFAULT_SINK@'])
     vol = int(re.search(r'(\d+)%', out).group(1))
     muted = sh(['pactl', 'get-sink-mute', '@DEFAULT_SINK@']).endswith('yes')
     icons = ["", "", ""]
-    icon = "" if muted else icons[min(vol // 34, 2)] 
+    icon = "" if muted else icons[min(vol // 34, 2)]
     return vol, icon
+
 
 def rofi_pick(kind):
     short = sh(['pactl', 'list', 'short', kind]).splitlines()
@@ -41,6 +50,7 @@ def rofi_pick(kind):
     if selection:
         name = selection.split('\t')[1]
         sh(['pactl', 'set-default-' + kind[:-1], node])
+
 
 if len(sys.argv) > 1 and sys.argv[1] in ('pick-sink', 'pick-source'):
     rofi_pick('sinks' if 'sink' in sys.argv[1] else 'sources')
