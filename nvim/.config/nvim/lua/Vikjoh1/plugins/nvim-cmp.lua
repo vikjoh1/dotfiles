@@ -28,7 +28,7 @@ return {
 			return vim.api.nvim_replace_termcodes(keys, true, true, true)
 		end
 		local column = function()
-			local _line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+			local _line, col = unpack(vim.api.nvim_win_get_cursor(0))
 			return col
 		end
 		local in_whitespace = function()
