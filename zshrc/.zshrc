@@ -4,7 +4,7 @@ export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
 export PGHOST="/var/run/postgresql"
 
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/local/go/bin:~/go/bin
 
 HISTFILE=~/.history
 HISTSIZE=10000
@@ -34,3 +34,6 @@ alias gsw="git switch"
 alias gl="git log --oneline --graph --decorate"
 
 export PATH="${XDG_DATA_HOME:-$HOME/.local/share}/bob/nvim-bin:$PATH"
+
+[ -f "/home/vikjoh/.ghcup/env" ] && . "/home/vikjoh/.ghcup/env" # ghcup-envexport PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

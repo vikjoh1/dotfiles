@@ -92,12 +92,4 @@ return {
       { "<leader>pk", function () require("snacks").picker.keymaps({ layput = "ivy" }) end, desc = "search keymaps" },
     },
   },
-  {
-    "folke/todo-comments.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    keys = {
-      { "<leader>pt", function () require("snacks").picker.todo_comments() end, desc = "todo" },
-      { "<leader>pT", function () require("snacks").picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
-    }
-  },
 }

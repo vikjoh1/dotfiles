@@ -3,7 +3,6 @@ return {
   lazy = false,
   dependencies = {
     "mason-org/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
     "hrsh7th/cmp-nvim-lsp",
     "neovim/nvim-lspconfig",
     { "folke/neodev.nvim", opts = {} },
@@ -13,8 +12,6 @@ return {
 
     local mason = require("mason")
     local mason_lspconfig = require("mason-lspconfig")
-
-    -- local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
     mason.setup({
       ui = {
@@ -38,10 +35,5 @@ return {
         "ts_ls",
       },
     })
-
-    -- local capabilities = cmp_nvim_lsp.default_capabilities()
-    -- vim.lsp.config("*", {
-    --   capabilities = capabilities,
-    -- })
   end,
 }

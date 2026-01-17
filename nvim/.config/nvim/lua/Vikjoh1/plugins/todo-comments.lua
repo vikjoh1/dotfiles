@@ -29,5 +29,12 @@ return {
     vim.keymap.set("n", "[t", function ()
       todo_comments.jump_prev()
     end, { desc = "previous todo comment" })
+
+    vim.keymap.set("n", "<leader>pt", function ()
+      require("snacks").picker.todo_comments()
+    end, { desc = "todo" })
+    vim.keymap.set("n", "<leader>pT", function ()
+      require("snacks").picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
+    end, { desc = "Todo/Fix/Fixme" })
   end,
 }

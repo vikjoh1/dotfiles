@@ -18,7 +18,8 @@ return {
 		local cmp = require("cmp")
 		local has_luasnip, luasnip = pcall(require, "luasnip")
 		local lspkind_ok, lspkind = pcall(require, "lspkind")
-		local colorizer = require("tailwindcss-colorizer-cmp").formatter
+		local colorizer_ok, colorizer_mod = pcall(require, "tailwindcss-colorizer-cmp")
+		local colorizer = colorizer_ok and colorizer_mod.formatter or nil
 
 		if has_luasnip then
 			require("luasnip.loaders.from_vscode").lazy_load()
@@ -262,7 +263,7 @@ return {
               ellipsis_char = "...",
             })(entry, vim_item)
           end
-          if entry.source.name == "nvim_lsp" then
+          if entry.source.name == "nvim_lsp" and colorizer then
             vim_item = colorizer(entry, vim_item)
           end
 					return vim_item
