@@ -134,9 +134,46 @@ return {
       },
     })
 
+    vim.lsp.config('kotlin_language_server', {
+      capabilities = capabilities,
+      root_dir = function(bufnr, on_dir)
+        local fname = vim.api.nvim_buf_get_name(bufnr)
+        on_dir(
+          vim.fs.root(fname, "settings.gradle")
+          or vim.fs.root(fname, "settings.gradle.kts")
+          or vim.fs.root(fname, "build.gradle")
+          or vim.fs.root(fname, "build.gradle.kts")
+          or vim.fs.root(fname, ".git")
+        )
+      end,
+      init_options = {
+        storagePath = vim.fn.stdpath("cache") .. "/kotlin_language_server",
+      },
+      settings = {
+        kotlin = {
+          android = {
+            sdk = vim.fn.expand("$HOME/Android/Sdk"),
+          },
+          compiler = {
+            jvm = {
+              target = "17",
+            },
+          },
+          externalSources = {
+            autoConvertToKotlin = true,
+            useKlsScheme = true,
+          },
+          indexing = {
+            enabled = true,
+          },
+        },
+      },
+    })
+
     vim.lsp.enable('lua_ls')
     vim.lsp.enable('ts_ls')
     vim.lsp.enable('gopls')
+    vim.lsp.enable('kotlin_language_server')
 
     vim.lsp.set_log_level("WARN")
   end

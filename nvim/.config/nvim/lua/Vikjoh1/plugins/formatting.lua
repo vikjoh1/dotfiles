@@ -39,6 +39,7 @@ return {
 				lua = { "stylua" },
 				python = { "black" },
         go = { "goimports", "gofumpt" },
+        kotlin = { "ktlint" },
 				markdown = { "prettier" },
 				["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 			},

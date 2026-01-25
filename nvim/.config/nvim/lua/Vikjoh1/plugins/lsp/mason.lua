@@ -33,6 +33,7 @@ return {
         "emmet_language_server",
         "marksman",
         "ts_ls",
+        "kotlin_language_server",
       },
     })
   end,
