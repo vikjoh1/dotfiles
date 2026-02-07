@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 ICON_SPK_LOW=""
 ICON_SPK_MED=""
 ICON_SPK_HIGH=""

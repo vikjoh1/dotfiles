@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -e
 
 if ! bluetoothctl show >/dev/null 2>&1; then
   notify-send -u normal "Bluetooth" "No controller found"

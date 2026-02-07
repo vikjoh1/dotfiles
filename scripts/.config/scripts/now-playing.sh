@@ -1,7 +1,10 @@
-#!/bin/bash
-out=$(playerctl metadata --format "{{artist}} - {{title}}" 2>/dev/null)
-if [ -n "$out" ]; then
-    echo "$out"
-else
-    echo "No music playing"
+#!/usr/bin/env bash
+
+artist=$(playerctl metadata artist 2>/dev/null)
+title=$(playerctl metadata title 2>/dev/null)
+
+if [[ -n "$artist" && -n "$title" ]]; then
+    echo -e "$artist - \n$title"
+elif [[ -n "$title" ]]; then
+    echo "$title"
 fi
