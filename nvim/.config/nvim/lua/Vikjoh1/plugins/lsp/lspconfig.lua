@@ -44,7 +44,7 @@ return {
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
 				opts.desc = "restart LSP"
-				vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+				vim.keymap.set("n", "<leader>rs", ":lsp restart<CR>", opts)
 
 				vim.keymap.set("i", "<C-h>", function()
 					vim.lsp.buf.signature_help()
@@ -66,11 +66,13 @@ return {
 			update_in_insert = false,
 		})
 
-		-- local lspconfig = require("lspconfig")
+    vim.keymap.set("n", "<leader>lx", function ()
+      local current = vim.diagnostic.config().virtual_text
+      vim.diagnostic.config({ virtual_text = not current })
+    end, { desc = "Toggle LSP virtual text" })
+
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 		local capabilities = cmp_nvim_lsp.default_capabilities()
-		-- local util = require("lspconfig.util")
-		--
 
 		vim.lsp.config("lua_ls", {
 			capabilities = capabilities,
@@ -189,7 +191,5 @@ return {
 		vim.lsp.enable("gopls")
 		vim.lsp.enable("kotlin_language_server")
 		vim.lsp.enable("elmls")
-
-		vim.lsp.set_log_level("WARN")
 	end,
 }

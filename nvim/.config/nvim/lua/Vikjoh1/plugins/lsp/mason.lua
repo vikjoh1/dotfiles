@@ -3,6 +3,7 @@ return {
   lazy = false,
   dependencies = {
     "mason-org/mason-lspconfig.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
     "hrsh7th/cmp-nvim-lsp",
     "neovim/nvim-lspconfig",
     { "folke/neodev.nvim", opts = {} },
@@ -12,6 +13,7 @@ return {
 
     local mason = require("mason")
     local mason_lspconfig = require("mason-lspconfig")
+    local mason_tool_installer = require("mason-tool-installer")
 
     mason.setup({
       ui = {
@@ -35,6 +37,16 @@ return {
         "ts_ls",
         "kotlin_language_server",
       },
+    })
+
+    mason_tool_installer.setup({
+      ensure_installed = {
+        "prettier",
+        "stylua",
+        "isort",
+        "pylint",
+        "clangd"
+      }
     })
   end,
 }
