@@ -89,7 +89,7 @@ return {
       { "<leader>pc", function () require("snacks").picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "find config" },
       { "<leader>ps", function () require("snacks").picker.grep() end, desc = "grep word" },
       { "<leader>pws", function () require("snacks").picker.grep_word() end, desc = "search word under cursor or visual sel", mode = { "n", "x" } },
-      { "<leader>pk", function () require("snacks").picker.keymaps({ layput = "ivy" }) end, desc = "search keymaps" },
+      { "<leader>pk", function () require("snacks").picker.keymaps({ layout = "ivy" }) end, desc = "search keymaps" },
     },
   },
 }

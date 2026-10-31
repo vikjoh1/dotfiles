@@ -6,11 +6,8 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     "hrsh7th/cmp-nvim-lsp",
     "neovim/nvim-lspconfig",
-    { "folke/neodev.nvim", opts = {} },
   },
   config = function ()
-    require("neodev").setup()
-
     local mason = require("mason")
     local mason_lspconfig = require("mason-lspconfig")
     local mason_tool_installer = require("mason-tool-installer")
