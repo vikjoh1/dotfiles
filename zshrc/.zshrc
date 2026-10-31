@@ -51,7 +51,7 @@ alias gl="git log --oneline --graph --decorate"
 
 export PATH="${XDG_DATA_HOME:-$HOME/.local/share}/bob/nvim-bin:$PATH"
 
-[ -f "/home/vikjoh/.ghcup/env" ] && . "/home/vikjoh/.ghcup/env" # ghcup-envexport PATH="$HOME/.local/bin:$PATH"
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 export PATH="$HOME/.local/bin:$PATH"
 
 export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
@@ -61,3 +61,6 @@ export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
 export PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
 export PATH="$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin"
 
+
+# opencode
+export PATH="$HOME/.opencode/bin:$PATH"
